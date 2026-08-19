@@ -1,19 +1,18 @@
 # Financial Budget vs Actual | FP&A Analysis
 
-Proyecto end-to-end de análisis financiero enfocado en **Budget vs Actual / FP&A**, desarrollado con el objetivo de analizar desvíos presupuestarios y evaluar el desempeño financiero por departamento, categoría, región y período.
+Proyecto end-to-end de análisis financiero enfocado en **Budget vs Actual / FP&A**, integrando Power Query, PostgreSQL, SQL, Power BI y DAX.
 
-El proyecto recorre todo el flujo de trabajo de Data Analytics: desde la limpieza y transformación de datos hasta el modelado en base de datos, análisis SQL, creación de métricas DAX y desarrollo de dashboards interactivos en Power BI.
+## Dashboard
 
-## Herramientas utilizadas
+### Executive Overview
 
-- Excel
-- Power Query
-- PostgreSQL
-- SQL
-- Power BI
-- DAX
+![Executive Overview](images/executive_overview.png)
 
----
+### Detailed Analysis
+
+![Detailed Analysis](images/detailed_analysis.png)
+
+
 
 ## Objetivo del proyecto
 
