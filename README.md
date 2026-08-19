@@ -297,7 +297,7 @@ Financial-Budget-vs-Actual/
 │   └── 06_analisis_negocio.sql
 │
 ├── powerbi/
-│   └── Financial_Budget_vs_Actual_FP&A.pbix
+│   └── financial_budget_vs_actual_fp&a.pbix
 │
 ├── images/
 │   ├── power_query_etl.png
