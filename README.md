@@ -21,15 +21,15 @@
 
 Vista ejecutiva del desempeño presupuestario general, incluyendo Budget, Actual, Variance, Variance %, análisis por departamento, región y evolución temporal.
 
-![Executive Overview](images/executive_overview.png)
+![Executive Overview](./images/executive_overview.png)
 
 ---
 
 ### 2. Detailed Analysis
 
-Vista orientada a profundizar en los principales desvíos por categoría y departamento, junto con la evolución mensual de la Variance.
+Vista orientada a profundizar en la composición de los principales desvíos por categoría y departamento, junto con la evolución mensual de la Variance.
 
-![Detailed Analysis](images/detailed_analysis.png)
+![Detailed Analysis](./images/detailed_analysis.png)
 
 ---
 
@@ -37,7 +37,7 @@ Vista orientada a profundizar en los principales desvíos por categoría y depar
 
 Analizar la ejecución presupuestaria de una organización durante **2021–2023**, comparando Budget vs Actual e identificando desvíos por **departamento, categoría, región y período**.
 
-El dataset final utilizado contiene **9.992 transacciones** luego del proceso de limpieza y transformación.
+El dataset final contiene **9.992 transacciones** luego del proceso de limpieza y transformación.
 
 ---
 
@@ -46,36 +46,36 @@ El dataset final utilizado contiene **9.992 transacciones** luego del proceso de
 `Raw Data` ➔ `Power Query` ➔ `PostgreSQL` ➔ `SQL` ➔ `Power BI + DAX`
 
 1. **Power Query:** limpieza y transformación de los datos.
-2. **PostgreSQL:** carga de la información y construcción de un modelo estrella.
+2. **PostgreSQL:** carga de información y construcción de un modelo estrella.
 3. **SQL:** análisis de Budget, Actual, Variance y Variance %.
-4. **Power BI + DAX:** modelado analítico, creación de métricas y desarrollo de dashboards interactivos.
+4. **Power BI + DAX:** modelado analítico, métricas financieras y dashboards interactivos.
 
 <details>
   <summary><b>Ver detalle técnico del proyecto</b></summary>
 
 ### Transformación en Power Query
 
-Se revisaron tipos de datos, duplicados, valores vacíos y consistencia de la información antes de exportar el dataset limpio para su carga en PostgreSQL.
+Se revisaron tipos de datos, registros duplicados, valores vacíos y consistencia de la información antes de exportar el dataset limpio.
 
-![Power Query ETL](images/power_query_etl.png)
+![Power Query ETL](./images/power_query_etl.png)
 
 ### Modelado en PostgreSQL
 
-A partir de la tabla de staging se construyó un **Star Schema** con una tabla de hechos y dimensiones de fecha, departamento, categoría, región y método de pago.
+A partir de la tabla de staging se construyó un **Star Schema** compuesto por una tabla de hechos y dimensiones de fecha, departamento, categoría, región y método de pago.
 
-Las relaciones fueron implementadas mediante claves foráneas para mantener la integridad del modelo.
+Las relaciones fueron implementadas mediante claves foráneas.
 
-![SQL Foreign Keys](images/sql_foreign_keys.png)
+![SQL Foreign Keys](./images/sql_foreign_keys.png)
 
 ### Modelo de Datos
 
-El modelo dimensional fue posteriormente utilizado como base para el análisis en Power BI.
+El modelo dimensional fue utilizado como base para el análisis y la construcción del reporte en Power BI.
 
-![Data Model](images/data_model.png)
+![Data Model](./images/data_model.png)
 
 ### Análisis con SQL
 
-Se desarrollaron consultas orientadas a responder preguntas como:
+Se desarrollaron consultas para responder preguntas como:
 
 - ¿Cuál es el desvío total entre Budget y Actual?
 - ¿Qué departamentos presentan los mayores desvíos?
@@ -84,7 +84,7 @@ Se desarrollaron consultas orientadas a responder preguntas como:
 - ¿Cómo evoluciona Budget vs Actual en el tiempo?
 - ¿Qué departamentos presentan la mayor Variance %?
 
-![SQL Analysis](images/sql_analysis.png)
+![SQL Analysis](./images/sql_analysis.png)
 
 Las consultas completas se encuentran disponibles en la carpeta `sql/`.
 
@@ -97,9 +97,9 @@ En Power BI se creó una tabla de medidas para calcular dinámicamente:
 - Variance
 - Variance %
 
-Estas métricas responden a los filtros aplicados por fecha, departamento y región.
+Las métricas responden a los filtros aplicados por fecha, departamento y región.
 
-![DAX Measures](images/dax_measures.png)
+![DAX Measures](./images/dax_measures.png)
 
 </details>
 
@@ -144,8 +144,8 @@ Los filtros por **fecha, departamento y región** permiten analizar dinámicamen
 ## 📈 Recomendaciones
 
 - Revisar las premisas presupuestarias utilizando el comportamiento histórico como referencia.
-- Priorizar el seguimiento de **Marketing, HR, Salaries y Utilities**.
-- Monitorear periódicamente **Variance y Variance %** para detectar desvíos con anticipación.
+- Priorizar el seguimiento de **Marketing, HR, Salaries y Utilities** por su mayor nivel de desvío.
+- Monitorear periódicamente **Variance y Variance %** para detectar desviaciones con mayor anticipación.
 - Analizar los períodos con mayores picos para identificar los factores detrás de esas variaciones.
 
 ---
@@ -177,6 +177,13 @@ Financial-Budget-vs-Actual/
 │   └── financial_budget_vs_actual_fp&a.pbix
 │
 ├── images/
+│   ├── power_query_etl.png
+│   ├── sql_foreign_keys.png
+│   ├── data_model.png
+│   ├── sql_analysis.png
+│   ├── dax_measures.png
+│   ├── executive_overview.png
+│   └── detailed_analysis.png
 │
 └── README.md
 ```
