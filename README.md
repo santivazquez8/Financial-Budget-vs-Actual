@@ -21,7 +21,7 @@
 
 Vista ejecutiva del desempeño presupuestario general, incluyendo Budget, Actual, Variance, Variance %, análisis por departamento, región y evolución temporal.
 
-![Executive Overview](./images/executive_overview.png)
+![Executive Overview](images/executive_overview.png)
 
 ---
 
@@ -29,7 +29,7 @@ Vista ejecutiva del desempeño presupuestario general, incluyendo Budget, Actual
 
 Vista orientada a profundizar en la composición de los principales desvíos por categoría y departamento, junto con la evolución mensual de la Variance.
 
-![Detailed Analysis](./images/detailed_analysis.png)
+![Detailed Analysis](images/detailed_analysis.png)
 
 ---
 
@@ -50,30 +50,33 @@ El dataset final contiene **9.992 transacciones** luego del proceso de limpieza 
 3. **SQL:** análisis de Budget, Actual, Variance y Variance %.
 4. **Power BI + DAX:** modelado analítico, métricas financieras y dashboards interactivos.
 
-<details>
-  <summary><b>Ver detalle técnico del proyecto</b></summary>
+---
 
-### Transformación en Power Query
+## 🧹 Transformación en Power Query
 
 Se revisaron tipos de datos, registros duplicados, valores vacíos y consistencia de la información antes de exportar el dataset limpio.
 
-![Power Query ETL](./images/power_query_etl.png)
+![Power Query ETL](images/power_query_etl.png)
 
-### Modelado en PostgreSQL
+---
+
+## 🗄️ Modelado en PostgreSQL
 
 A partir de la tabla de staging se construyó un **Star Schema** compuesto por una tabla de hechos y dimensiones de fecha, departamento, categoría, región y método de pago.
 
 Las relaciones fueron implementadas mediante claves foráneas.
 
-![SQL Foreign Keys](./images/sql_foreign_keys.png)
+![SQL Foreign Keys](images/sql_foreign_keys.png)
 
 ### Modelo de Datos
 
 El modelo dimensional fue utilizado como base para el análisis y la construcción del reporte en Power BI.
 
-![Data Model](./images/data_model.png)
+![Data Model](images/data_model.png)
 
-### Análisis con SQL
+---
+
+## 🔎 Análisis con SQL
 
 Se desarrollaron consultas para responder preguntas como:
 
@@ -84,11 +87,13 @@ Se desarrollaron consultas para responder preguntas como:
 - ¿Cómo evoluciona Budget vs Actual en el tiempo?
 - ¿Qué departamentos presentan la mayor Variance %?
 
-![SQL Analysis](./images/sql_analysis.png)
+![SQL Analysis](images/sql_analysis.png)
 
 Las consultas completas se encuentran disponibles en la carpeta `sql/`.
 
-### Medidas DAX
+---
+
+## 📐 Medidas DAX
 
 En Power BI se creó una tabla de medidas para calcular dinámicamente:
 
@@ -99,9 +104,7 @@ En Power BI se creó una tabla de medidas para calcular dinámicamente:
 
 Las métricas responden a los filtros aplicados por fecha, departamento y región.
 
-![DAX Measures](./images/dax_measures.png)
-
-</details>
+![DAX Measures](images/dax_measures.png)
 
 ---
 
@@ -144,8 +147,8 @@ Los filtros por **fecha, departamento y región** permiten analizar dinámicamen
 ## 📈 Recomendaciones
 
 - Revisar las premisas presupuestarias utilizando el comportamiento histórico como referencia.
-- Priorizar el seguimiento de **Marketing, HR, Salaries y Utilities** por su mayor nivel de desvío.
-- Monitorear periódicamente **Variance y Variance %** para detectar desviaciones con mayor anticipación.
+- Priorizar el seguimiento de **Marketing, HR, Salaries y Utilities**.
+- Monitorear periódicamente **Variance y Variance %** para detectar desvíos con anticipación.
 - Analizar los períodos con mayores picos para identificar los factores detrás de esas variaciones.
 
 ---
@@ -177,13 +180,7 @@ Financial-Budget-vs-Actual/
 │   └── financial_budget_vs_actual_fp&a.pbix
 │
 ├── images/
-│   ├── power_query_etl.png
-│   ├── sql_foreign_keys.png
-│   ├── data_model.png
-│   ├── sql_analysis.png
-│   ├── dax_measures.png
-│   ├── executive_overview.png
+
 │   └── detailed_analysis.png
 │
 └── README.md
-```
