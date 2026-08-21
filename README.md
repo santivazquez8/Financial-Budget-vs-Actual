@@ -27,7 +27,7 @@ Vista ejecutiva del desempeño presupuestario general, incluyendo Budget, Actual
 
 ### 2. Detailed Analysis
 
-Vista orientada a profundizar en la composición de los principales desvíos por categoría y departamento, junto con la evolución mensual de la Variance.
+Vista orientada a profundizar en los principales desvíos por categoría y departamento, junto con la evolución mensual de la Variance.
 
 ![Detailed Analysis](images/detailed_analysis.png)
 
@@ -45,29 +45,37 @@ El dataset final utilizado contiene **9.992 transacciones** luego del proceso de
 
 `Raw Data` ➔ `Power Query` ➔ `PostgreSQL` ➔ `SQL` ➔ `Power BI + DAX`
 
-- **Power Query:** limpieza y transformación de los datos.
-- **PostgreSQL:** carga y construcción de un modelo estrella.
-- **SQL:** análisis de Budget, Actual, Variance y Variance %.
-- **Power BI + DAX:** modelado analítico y desarrollo de dashboards interactivos.
+1. **Power Query:** limpieza y transformación de los datos.
+2. **PostgreSQL:** carga de la información y construcción de un modelo estrella.
+3. **SQL:** análisis de Budget, Actual, Variance y Variance %.
+4. **Power BI + DAX:** modelado analítico, creación de métricas y desarrollo de dashboards interactivos.
 
 <details>
   <summary><b>Ver detalle técnico del proyecto</b></summary>
 
-### Power Query
+### Transformación en Power Query
 
-Se realizó la limpieza de datos, corrección de tipos, eliminación de duplicados, tratamiento de valores vacíos y estandarización de la información.
+Se revisaron tipos de datos, duplicados, valores vacíos y consistencia de la información antes de exportar el dataset limpio para su carga en PostgreSQL.
 
 ![Power Query ETL](images/power_query_etl.png)
 
+### Modelado en PostgreSQL
+
+A partir de la tabla de staging se construyó un **Star Schema** con una tabla de hechos y dimensiones de fecha, departamento, categoría, región y método de pago.
+
+Las relaciones fueron implementadas mediante claves foráneas para mantener la integridad del modelo.
+
+![SQL Foreign Keys](images/sql_foreign_keys.png)
+
 ### Modelo de Datos
 
-Se construyó un **Star Schema** compuesto por una tabla de hechos (`fact_financial_transactions`) y dimensiones de fecha, departamento, categoría, región y método de pago.
+El modelo dimensional fue posteriormente utilizado como base para el análisis en Power BI.
 
 ![Data Model](images/data_model.png)
 
-### Análisis SQL
+### Análisis con SQL
 
-Las consultas fueron desarrolladas para responder preguntas como:
+Se desarrollaron consultas orientadas a responder preguntas como:
 
 - ¿Cuál es el desvío total entre Budget y Actual?
 - ¿Qué departamentos presentan los mayores desvíos?
@@ -80,6 +88,19 @@ Las consultas fueron desarrolladas para responder preguntas como:
 
 Las consultas completas se encuentran disponibles en la carpeta `sql/`.
 
+### Medidas DAX
+
+En Power BI se creó una tabla de medidas para calcular dinámicamente:
+
+- Total Budget
+- Total Actual
+- Variance
+- Variance %
+
+Estas métricas responden a los filtros aplicados por fecha, departamento y región.
+
+![DAX Measures](images/dax_measures.png)
+
 </details>
 
 ---
@@ -88,13 +109,13 @@ Las consultas completas se encuentran disponibles en la carpeta `sql/`.
 
 ### Executive Overview
 
-Permite visualizar rápidamente:
+Permite responder rápidamente:
 
-- Budget y Actual total.
-- Variance absoluta y porcentual.
-- Desvíos por departamento.
-- Variance por región.
-- Evolución temporal de Budget vs Actual.
+- ¿Cuál es el Budget y Actual total?
+- ¿Cuál es la Variance absoluta y porcentual?
+- ¿Qué departamentos presentan mayores diferencias?
+- ¿Qué regiones concentran los principales desvíos?
+- ¿Cómo evoluciona Budget vs Actual en el tiempo?
 
 ### Detailed Analysis
 
@@ -156,7 +177,6 @@ Financial-Budget-vs-Actual/
 │   └── financial_budget_vs_actual_fp&a.pbix
 │
 ├── images/
-│
 │
 └── README.md
 ```
